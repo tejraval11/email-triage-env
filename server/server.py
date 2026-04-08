@@ -130,3 +130,8 @@ async def close():
 @app.get("/health", tags=["health"])
 async def health():
     return {"status": "ok"}
+
+
+def start():
+    import uvicorn
+    uvicorn.run("server:app", host="0.0.0.0", port=7860)

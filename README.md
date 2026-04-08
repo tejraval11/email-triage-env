@@ -29,6 +29,8 @@ activity with clear, deterministic success criteria, making it ideal for RL eval
 ```
 META AI HACKATHON/
 ├── inference.py              ← Root inference script (spec-required)
+├── pyproject.toml            ← Build metadata (required by openenv validate)
+├── .env                      ← API keys and endpoint config (ignored in git)
 ├── demo_run.py               ← Live demo script (run this to see it work!)
 ├── README.md
 └── server/
@@ -252,8 +254,10 @@ python inference.py
 git clone https://huggingface.co/spaces/YOUR_USERNAME/email-triage-env
 cd email-triage-env
 
-# Copy all server files into the Space root
+# Copy server files and root requirements into the Space root
 cp -r "C:/Users/hardi/Downloads/META AI HACKATHON/server/." .
+cp "C:/Users/hardi/Downloads/META AI HACKATHON/inference.py" .
+cp "C:/Users/hardi/Downloads/META AI HACKATHON/pyproject.toml" .
 
 # Push
 git add .
@@ -261,7 +265,7 @@ git commit -m "Add Email Triage Environment"
 git push
 ```
 
-> **Important**: The Space root must contain `Dockerfile`, `server.py`, `email_triage_env.py`, `openenv.yaml`, `requirements.txt`, and the `data/` folder.
+> **Important**: The Space root must contain `Dockerfile`, `server.py`, `email_triage_env.py`, `openenv.yaml`, `requirements.txt`, the `data/` folder, AND the root `inference.py` + `pyproject.toml` files.
 
 ### Step 3 — Wait for it to be "Running"
 
