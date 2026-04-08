@@ -251,6 +251,9 @@ class EmailTriageEnv:
             reward -= 0.05
             self.last_action_error = f"Malformed action payload: {exc}"
 
+        # Strictly clamp grade between 0.01 and 0.99 (per OpenEnv Phase 2 requirements)
+        grade = max(0.01, min(0.99, grade))
+
         # Reward is the marginal improvement in grade, plus any penalties
         grade_diff = grade - self.last_grade
         reward += grade_diff

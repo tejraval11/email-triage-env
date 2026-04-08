@@ -245,7 +245,7 @@ def run_task(client: OpenAI, task: str) -> Tuple[bool, int, float, List[float]]:
         cumulative = float(state_resp.get("cumulative_reward", sum(rewards)))
         # Normalize: best possible grade is 1.0
         max_possible = 1.0
-        score = min(max(cumulative / max_possible, 0.0), 1.0)
+        score = min(max(cumulative / max_possible, 0.01), 0.99)
         success = score >= SUCCESS_THRESHOLD
 
     except Exception as exc:
