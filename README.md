@@ -30,15 +30,16 @@ activity with clear, deterministic success criteria, making it ideal for RL eval
 META AI HACKATHON/
 ├── inference.py              ← Root inference script (spec-required)
 ├── pyproject.toml            ← Build metadata (required by openenv validate)
+├── uv.lock                   ← Package lock (required by openenv validate)
+├── Dockerfile                ← Moved to root for simple deployment
+├── openenv.yaml              ← Moved to root for simple deployment
+├── requirements.txt          ← Moved to root for simple deployment
 ├── .env                      ← API keys and endpoint config (ignored in git)
 ├── demo_run.py               ← Live demo script (run this to see it work!)
 ├── README.md
 └── server/
+    ├── app.py                ← FastAPI app with strict `main()` entrypoint
     ├── email_triage_env.py   ← Core environment (Pydantic models + graders)
-    ├── server.py             ← FastAPI app
-    ├── openenv.yaml          ← OpenEnv metadata
-    ├── requirements.txt
-    ├── Dockerfile
     └── data/
         └── emails.py         ← 15 labeled emails + ground-truth labels
 ```
@@ -254,10 +255,8 @@ python inference.py
 git clone https://huggingface.co/spaces/YOUR_USERNAME/email-triage-env
 cd email-triage-env
 
-# Copy server files and root requirements into the Space root
-cp -r "C:/Users/hardi/Downloads/META AI HACKATHON/server/." .
-cp "C:/Users/hardi/Downloads/META AI HACKATHON/inference.py" .
-cp "C:/Users/hardi/Downloads/META AI HACKATHON/pyproject.toml" .
+# Copy all files into the Space root
+cp -r "C:/Users/hardi/Downloads/META AI HACKATHON/." .
 
 # Push
 git add .
@@ -265,7 +264,7 @@ git commit -m "Add Email Triage Environment"
 git push
 ```
 
-> **Important**: The Space root must contain `Dockerfile`, `server.py`, `email_triage_env.py`, `openenv.yaml`, `requirements.txt`, the `data/` folder, AND the root `inference.py` + `pyproject.toml` files.
+> **Important**: The Space root must contain `Dockerfile`, `openenv.yaml`, `requirements.txt`, `pyproject.toml`, `uv.lock`, `inference.py`, AND the `server/` directory containing `app.py`.
 
 ### Step 3 — Wait for it to be "Running"
 
